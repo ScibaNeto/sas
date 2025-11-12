@@ -282,3 +282,4 @@ COMMENT ON TABLE public.order_items IS 'Itens que compõem um pedido';
 COMMENT ON TABLE public.notifications IS 'Notificações dos usuários';
 
 
+

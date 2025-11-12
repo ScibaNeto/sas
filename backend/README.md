@@ -125,3 +125,4 @@ curl -X GET http://localhost:3000/api/auth/me \
 - **Autenticação**: Baseada em tokens JWT do Supabase
 
 
+

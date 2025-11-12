@@ -100,3 +100,4 @@ Após configurar, teste se está funcionando:
 3. Verifique os logs para erros de conexão
 
 
+

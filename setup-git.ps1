@@ -50,3 +50,4 @@ Write-Host "Fazendo push para o GitHub..." -ForegroundColor Yellow
 Write-Host "`nConcluído! Repositório configurado e enviado para o GitHub." -ForegroundColor Green
 
 
+

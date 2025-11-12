@@ -108,3 +108,4 @@ Todas as tabelas têm Row Level Security (RLS) habilitado com políticas que:
 O schema inclui categorias padrão que são inseridas automaticamente.
 
 
+
