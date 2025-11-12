@@ -111,3 +111,4 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "`nVeja COMANDOS_GIT.md para mais informações" -ForegroundColor Yellow
 }
 
+

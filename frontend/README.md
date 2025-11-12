@@ -58,3 +58,4 @@ frontend/
 └── vite.config.js      # Configuração do Vite
 ```
 
+

@@ -124,3 +124,4 @@ curl -X GET http://localhost:3000/api/auth/me \
 - **CORS**: Configurado para aceitar apenas origem permitida
 - **Autenticação**: Baseada em tokens JWT do Supabase
 
+
