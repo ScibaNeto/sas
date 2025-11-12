@@ -1,0 +1,94 @@
+Po2 José Scibarauskas Neto 
+kagle: https://www.kaggle.com/gregorut/videogamesales
+
+# Carregar pacotes
+library(ggplot2)
+library(dplyr)
+library(scales)
+1. 
+dados <- read.csv("caminho/para/vgsales.csv", stringsAsFactors = FALSE)
+
+head(dados)
+str(dados)
+
+dados <- dados %>%
+  mutate(Global_Sales = as.numeric(Global_Sales),
+         NA_Sales = as.numeric(NA_Sales),
+         EU_Sales = as.numeric(EU_Sales),
+         JP_Sales = as.numeric(JP_Sales),
+         Other_Sales = as.numeric(Other_Sales),
+         Year = as.numeric(Year))
+
+#Gráfico 1: 
+ggplot(dados, aes(x = Global_Sales)) +
+  geom_histogram(binwidth = 0.5, fill = "steelblue", color = "white") +
+  scale_x_continuous(labels = comma) +
+  labs(title = "Distribuição das Vendas Globais de Jogos",
+       x = "Vendas Globais (milhões de unidades)",
+       y = "Contagem de Jogos") +
+  theme_minimal()
+
+
+
+#gráfico 2: 
+top10 <- dados %>%
+  arrange(desc(Global_Sales)) %>%
+  head(10)
+
+ggplot(top10, aes(x = reorder(Name, Global_Sales), y = Global_Sales)) +
+  geom_col(fill = "darkgreen") +
+  coord_flip() +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Top 10 Jogos Mais Vendidos Globalmente",
+       x = "Jogo",
+       y = "Vendas Globais (milhões de unidades)") +
+  theme_minimal()
+
+#Gráfico 3: 
+vendas_plataforma <- dados %>%
+  group_by(Platform) %>%
+  summarise(Total_Global = sum(Global_Sales, na.rm = TRUE)) %>%
+  arrange(desc(Total_Global)) %>%
+  head(10)
+
+ggplot(vendas_plataforma, aes(x = reorder(Platform, Total_Global), y = Total_Global)) +
+  geom_col(fill = "purple") +
+  coord_flip() +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Top 10 Plataformas por Vendas Globais Acumuladas",
+       x = "Plataforma",
+       y = "Vendas Globais Totais (milhões de unidades)") +
+  theme_minimal()
+
+
+# Gráfico 4: 
+vendas_ano <- dados %>%
+  filter(!is.na(Year)) %>%
+  group_by(Year) %>%
+  summarise(Total_Global = sum(Global_Sales, na.rm = TRUE))
+
+ggplot(vendas_ano, aes(x = Year, y = Total_Global)) +
+  geom_line(color = "red", size = 1) +
+  geom_point(color = "red", size = 2) +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Tendência das Vendas Globais ao Longo dos Anos",
+       x = "Ano de Lançamento",
+       y = "Vendas Globais Totais (milhões de unidades)") +
+  theme_minimal()
+
+
+# Gráfico 5: 
+vendas_genero <- dados %>%
+  group_by(Genre) %>%
+  summarise(Media_Global = mean(Global_Sales, na.rm = TRUE),
+            Total_Global = sum(Global_Sales, na.rm = TRUE)) %>%
+  arrange(desc(Media_Global))
+
+ggplot(vendas_genero, aes(x = reorder(Genre, Media_Global), y = Media_Global)) +
+  geom_col(fill = "orange") +
+  coord_flip() +
+  scale_y_continuous(labels = comma) +
+  labs(title = "Venda Média Global por Género de Jogo",
+       x = "Género",
+       y = "Média de Vendas Globais (milhões de unidades)") +
+  theme_minimal()
